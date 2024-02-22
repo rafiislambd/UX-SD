@@ -197,7 +197,7 @@ def git_clone(url, dir, name, commithash=None):
         return
 
     try:
-        run(f'"{git}" clone "{url}" "{dir}"', f"Cloning {name} into {dir}...", f"Couldn't clone {name}", live=True)
+        run(f'"{git}" clone --config core.filemode=false "{url}" "{dir}"', f"Cloning {name} into {dir}...", f"Couldn't clone {name}", live=True)
     except RuntimeError:
         shutil.rmtree(dir, ignore_errors=True)
         raise
@@ -515,7 +515,7 @@ def configure_forge_reference_checkout(a1111_home: Path):
         ModelRef(arg_name="--ckpt-dir", relative_path="models/Stable-diffusion"),
         ModelRef(arg_name="--vae-dir", relative_path="models/VAE"),
         ModelRef(arg_name="--hypernetwork-dir", relative_path="models/hypernetworks"),
-        ModelRef(arg_name="--embeddings-dir", relative_path="models/embeddings"),
+        ModelRef(arg_name="--embeddings-dir", relative_path="embeddings"),
         ModelRef(arg_name="--lora-dir", relative_path="models/lora"),
         # Ref A1111 need to have sd-webui-controlnet installed.
         ModelRef(arg_name="--controlnet-dir", relative_path="models/ControlNet"),
